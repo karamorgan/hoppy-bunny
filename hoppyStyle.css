@@ -1,0 +1,99 @@
+:root {
+    --cream: #fef6cd;
+    --dark-purple: #28282f;
+    --medium-purple: #3f424c;
+    --title-font: 'Life Savers', cursive;
+    --body-font: 'Acme', sans-serif;
+}
+
+html {
+    background-color: var(--medium-purple);
+    cursor: default;
+}
+
+body {
+    margin: 0;
+}
+
+#title-div {
+    width: 100%;
+    height: 15vh;
+    box-sizing: border-box;
+    padding: 0 2rem;
+    background: linear-gradient(var(--dark-purple), var(--medium-purple));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--cream);
+}
+
+h1 {
+    font-family: var(--title-font);
+    font-size: 3rem;
+}
+
+#points-label {
+    font-family: var(--body-font);
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+#points-span {
+    margin-left: 0.5rem;
+}
+
+canvas {
+    position: absolute;
+    border: 5px var(--cream);
+    border-style: double none;
+}
+
+#game-over-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    opacity: 0;
+    font-family: var(--body-font);
+    pointer-events: none;
+    transition: all 0.5s ease-out;
+}
+
+#game-over-h2 {
+    margin: 0 auto;
+    font-size: 3rem;
+    color: var(--cream);
+    text-align: center;
+}
+
+#reset-btn {
+    width: 8rem;
+    height: 2.5rem;
+    margin: 0 auto;
+    display: block;
+    transition: all 0.3s ease-out;
+    font-family: var(--body-font);
+    font-size: 1.2rem;
+    background-color: var(--medium-purple);
+    border: 1px solid var(--cream);
+    border-radius: 0.4rem;
+    color: var(--cream);
+    cursor: pointer;
+}
+
+#reset-btn:hover {
+    letter-spacing: 0.1rem;
+    width: 9rem;
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 10px;
+    }
+}

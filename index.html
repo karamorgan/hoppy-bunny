@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Life+Savers&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="hoppyStyle.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="title-div">
+        <h1 id="title">Hoppy Bunny</h1>
+        <label for="points-span" id="points-label">Points:
+            <span id="points-span">0</span>
+        </label>
+    </div>
+    <canvas id="scenery-canvas" class="pixelate"></canvas>
+    <canvas id="game-canvas" class="pixelate"></canvas>
+    <div id="game-over-div">
+        <h2 id="game-over-h2">Game Over</h2>
+        <button id="reset-btn">Play Again</button>
+    </div>
+    <script src="hoppy.js"></script>
+</body>
+</html>
