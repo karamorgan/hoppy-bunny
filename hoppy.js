@@ -456,7 +456,7 @@ const game = (function() {
 
     // Mousedown or spacebar down initiates hop
     function _hop(event) {
-        event.preventDefault();
+        // event.preventDefault();
         if(!gameOver && (event.code === 'Space' || event.button === 0)) {
             bunny.hop();
         }
@@ -464,7 +464,7 @@ const game = (function() {
 
     // Ends linear portion of hop when mouse/spacebar released. This allows user to control hop height
     function _unhop(event) {
-        event.preventDefault();
+        // event.preventDefault();
         if(!gameOver) bunny.isLinear = false;
     }
 
