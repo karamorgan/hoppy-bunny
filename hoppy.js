@@ -269,7 +269,7 @@ class Carrot extends GameImage {
 
 const globals = (function() {
     const canvasWidth = window.innerWidth;
-    const canvasHeight = 0.8 * window.innerHeight;
+    const canvasHeight = Math.floor(Math.min(0.8 * window.innerHeight, 0.6 * window.innerWidth));
     let foregroundScrollSpeed;
 
     return {
@@ -438,18 +438,21 @@ const game = (function() {
                     _loseGame();
                 }
             });
+            if(bunny.collDetect(carrot.x, carrot.y, carrot.drawWidth, carrot.drawHeight)) {
+                carrot = new Carrot(); // Carrot disappears when collected, new carrot spawns immediately
+                pointsDisplay.innerText = ++points;
+            }
+    
+            // Remove obstacles that have passed offscreen
+            obstacles = obstacles.filter(obstacle => obstacle.x > -obstacle.drawWidth);
+            obstacles.forEach(obstacle => {
+                obstacle.draw(time, ctx);
+            });
+
+            carrot.draw(ctx);
         }
 
-        if(bunny.collDetect(carrot.x, carrot.y, carrot.drawWidth, carrot.drawHeight)) {
-            carrot = new Carrot(); // Carrot disappears when collected, new carrot spawns immediately
-            pointsDisplay.innerText = ++points;
-        }
-
-        obstacles = obstacles.filter(obstacle => obstacle.x > -obstacle.drawWidth); // Remove obstacles that have passed offscreen
-        obstacles.forEach(obstacle => {
-            obstacle.draw(time, ctx);
-        });
-        carrot.draw(ctx);
+    
         bunny.draw(time, ctx);
 
         animation = requestAnimationFrame(_loop);
@@ -508,7 +511,7 @@ const loopScenery = (function() {
         cancelAnimationFrame(animation);
     }
 
-    function _loop() {
+    function _loop(time) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         background.draw(ctx);
         midground.draw(ctx);

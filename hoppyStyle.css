@@ -50,6 +50,8 @@ h1 {
 
 canvas {
     position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
     border: 5px var(--cream);
     border-style: double none;
 }
@@ -58,7 +60,7 @@ canvas {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     opacity: 0;
     font-family: var(--body-font);
     pointer-events: none;
