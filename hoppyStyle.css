@@ -50,7 +50,7 @@ h1 {
 
 canvas {
     position: absolute;
-    top: 50%;
+    top: 57.5%;
     transform: translate(0, -50%);
     border: 5px var(--cream);
     border-style: double none;
@@ -58,7 +58,7 @@ canvas {
 
 #game-over-div {
     position: absolute;
-    top: 50%;
+    top: 57.5%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;

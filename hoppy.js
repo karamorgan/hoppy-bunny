@@ -71,6 +71,9 @@ class Animal extends GameImage {
 
         this.drawHeight = Math.floor(this.heightProportion * globals.getCanvasHeight());
         this.drawWidth = Math.floor(this.drawHeight * ratio);
+
+        // Adjust speed for small screens
+        this.relativeSpeedX = globals.getCanvasWidth() > 700 ? this.relativeSpeedX : this.relativeSpeedX / 2;
     }
 
     draw(time, ctx) {
@@ -85,7 +88,7 @@ class Animal extends GameImage {
 class Bird extends Animal {
     image = imageFiles.getImage('birds');
     y = Math.floor(Math.random() * globals.getCanvasHeight() / 2); // Spawn at any random height in top half of canvas
-    relativeSpeedX = Math.floor(Math.random() * 5) + 1;
+    relativeSpeedX = Math.floor(Math.random() * 4) + 1;
     heightProportion = 0.12;
     numPoses = 3;
     timePerPose = 400 / this.relativeSpeedX;
@@ -122,7 +125,7 @@ class Rabbit extends Mammal {
     runY = this.y;
     relativeSpeedX = -globals.getScrollSpeed();
     heightProportion = 0.15;
-    timePerPose = -360 / this.relativeSpeedX;
+    timePerPose = Math.min(-360 / this.relativeSpeedX, 150);
 
     // Hop properties
     #hopStartTime;
@@ -137,6 +140,7 @@ class Rabbit extends Mammal {
         super();
         this.run();
         this.setSize();
+        this.relativeSpeedX = -globals.getScrollSpeed();
 
         // Downward acceleration and initial y-velocity derived such that maximum hop peaks at top of canvas
         this.#accel = 2 * (this.drawHeight - this.runY) / (this.#ascentTime * (this.#maxLinearTime ** 2 - 1));
@@ -270,14 +274,15 @@ class Carrot extends GameImage {
 const globals = (function() {
     const canvasWidth = window.innerWidth;
     const canvasHeight = Math.floor(Math.min(0.8 * window.innerHeight, 0.6 * window.innerWidth));
+    let maxScrollSpeed = 3;
     let foregroundScrollSpeed;
 
     return {
         initialize,
         getCanvasWidth,
         getCanvasHeight,
+        resetScrollSpeed,
         getScrollSpeed,
-        setScrollSpeed,
         buildCanvas
     }
 
@@ -299,8 +304,9 @@ const globals = (function() {
         return foregroundScrollSpeed;
     }
 
-    function setScrollSpeed(speed) {
-        foregroundScrollSpeed = speed;
+    function resetScrollSpeed(gameOver) {
+        if(gameOver) foregroundScrollSpeed = 0;
+        else foregroundScrollSpeed = canvasWidth > 700 ? maxScrollSpeed : maxScrollSpeed / 2; // Adjust speed for small screens
     }
 
     // Called to build a the canvas for each the scenery and game layers
@@ -408,7 +414,7 @@ const game = (function() {
         gameOverDiv.style.pointerEvents = 'none';
 
         gameOver = false;
-        globals.setScrollSpeed(3);
+        globals.resetScrollSpeed(false);
         loopScenery.start(); // Start scrolling
         bunny = new Rabbit();
         carrot = new Carrot();
@@ -476,7 +482,7 @@ const game = (function() {
         gameOverDiv.style.pointerEvents = 'all';
 
         gameOver = true;
-        globals.setScrollSpeed(0); // Slow down animals
+        globals.resetScrollSpeed(true); // Slow down animals
         loopScenery.stop(); // Stop scenery animation
         bunny.idle(); // Game animation continues but bunny sits and sniffs
     }
