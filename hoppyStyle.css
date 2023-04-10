@@ -9,7 +9,7 @@
 html {
     background-color: var(--medium-purple);
     cursor: default;
-    -webkit-touch-callout:none;
+    /* -webkit-touch-callout:none; */
 }
 
 body {
