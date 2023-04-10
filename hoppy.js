@@ -391,8 +391,8 @@ const game = (function() {
     // Release determines hop height
     document.addEventListener('keydown', _hop);
     document.addEventListener('keyup', _unhop);
-    // document.addEventListener('touchstart', _hop);
-    // document.addEventListener('touchend', _unhop);
+    document.addEventListener('touchstart', _hop);
+    document.addEventListener('touchend', _unhop);
     canvas.addEventListener('mousedown', _hop);
     canvas.addEventListener('mouseup', _unhop);
 
