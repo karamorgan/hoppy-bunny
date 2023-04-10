@@ -9,7 +9,12 @@
 html {
     background-color: var(--medium-purple);
     cursor: default;
-    /* -webkit-touch-callout:none; */
+    /* -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none; */
 }
 
 body {
@@ -47,11 +52,6 @@ canvas {
     position: absolute;
     border: 5px var(--cream);
     border-style: double none;
-    -webkit-user-select:none;
-    -khtml-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
 }
 
 #game-over-div {
