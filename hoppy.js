@@ -454,6 +454,7 @@ const game = (function() {
 
     // Mousedown or spacebar down initiates hop
     function _hop(event) {
+        event.preventDefault();
         if(!gameOver && (event.code === 'Space' || event.button === 0)) {
             bunny.hop();
         }
