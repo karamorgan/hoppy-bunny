@@ -389,15 +389,11 @@ const game = (function() {
 
     // Either click or spacebar triggers a hop
     // Release determines hop height
-    document.addEventListener('keydown', (event) => {
-        if(event.code === 'Space') _hop();
-    });
+    document.addEventListener('keydown', (event) => { if(event.code === 'Space') _hop() });
     document.addEventListener('keyup', _unhop);
     document.addEventListener('touchstart', _hop);
     document.addEventListener('touchend', _unhop);
-    canvas.addEventListener('mousedown', (event) => {
-        if(event.button === 0) _hop();
-    });
+    canvas.addEventListener('mousedown', (event) => { if(event.button === 0) _hop() });
     canvas.addEventListener('mouseup', _unhop);
 
     return {
@@ -442,10 +438,11 @@ const game = (function() {
                     _loseGame();
                 }
             });
-            if(bunny.collDetect(carrot.x, carrot.y, carrot.drawWidth, carrot.drawHeight)) {
-                carrot = new Carrot(); // Carrot disappears when collected, new carrot spawns immediately
-                pointsDisplay.innerText = ++points;
-            }
+        }
+
+        if(bunny.collDetect(carrot.x, carrot.y, carrot.drawWidth, carrot.drawHeight)) {
+            carrot = new Carrot(); // Carrot disappears when collected, new carrot spawns immediately
+            pointsDisplay.innerText = ++points;
         }
 
         obstacles = obstacles.filter(obstacle => obstacle.x > -obstacle.drawWidth); // Remove obstacles that have passed offscreen
@@ -460,16 +457,11 @@ const game = (function() {
 
     // Mousedown or spacebar down initiates hop
     function _hop(event) {
-        // event.preventDefault();
-        // if(!gameOver && (event.code === 'Space' || event.button === 0)) {
-        if(!gameOver) {
-            bunny.hop();
-        }
+        if(!gameOver) bunny.hop();
     }
 
     // Ends linear portion of hop when mouse/spacebar released. This allows user to control hop height
-    function _unhop(event) {
-        // event.preventDefault();
+    function _unhop() {
         if(!gameOver) bunny.isLinear = false;
     }
 
