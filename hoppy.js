@@ -391,6 +391,8 @@ const game = (function() {
     // Release determines hop height
     document.addEventListener('keydown', _hop);
     document.addEventListener('keyup', _unhop);
+    document.addEventListener('touchstart', _hop);
+    document.addEventListener('touchend', _unhop);
     canvas.addEventListener('mousedown', _hop);
     canvas.addEventListener('mouseup', _unhop);
 
@@ -461,7 +463,8 @@ const game = (function() {
     }
 
     // Ends linear portion of hop when mouse/spacebar released. This allows user to control hop height
-    function _unhop() {
+    function _unhop(event) {
+        event.preventDefault();
         if(!gameOver) bunny.isLinear = false;
     }
 
