@@ -46,6 +46,7 @@ canvas {
     position: absolute;
     border: 5px var(--cream);
     border-style: double none;
+    user-select: none;
 }
 
 #game-over-div {
