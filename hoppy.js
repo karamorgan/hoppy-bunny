@@ -121,7 +121,7 @@ class Mammal extends Animal {
 }
 
 class Rabbit extends Mammal {
-    x = Math.floor(globals.getCanvasWidth() * 0.3);
+    x = Math.floor(globals.getCanvasWidth() * 0.1);
     runY = this.y;
     relativeSpeedX = -globals.getScrollSpeed();
     heightProportion = 0.15;
